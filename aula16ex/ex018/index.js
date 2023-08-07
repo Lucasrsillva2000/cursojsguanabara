@@ -1,6 +1,6 @@
-let num = window.document.getElementById('fnum')
-let lista = window.document.getElementById('flista')
-let res = window.document.getElementById('res')
+let num = document.querySelector('input#fnum')
+let lista = document.querySelector('select#flista')
+let res = document.querySelector('div#res')
 let valores = []
 
 function isNumero(n) {
@@ -21,31 +21,34 @@ function inLista(n, l) {
 
 function adicionar() {
   if (isNumero(num.value) && !inLista(num.value, valores)) {
-    valores.push(Number(num.value))
-    let item = document.createElement('option')
-    item.text = `Valor ${num.value} Adicionado.`
-    lista.appendChild(item)
+    valores.push(Number(num.value)) //push você adiciona elementos dentro de um vetor
+    let item = document.createElement('option') //cria o elemento HTML 'option' pelo JS
+    item.text = `Valor ${num.value} adicionado.`
+    lista.appendChild(item) //adiciona na lista
     res.innerHTML = ''
   } else {
-    alert('Valor Invalido ou já encontrado na lista')
+    window.alert('Valor inválido ou já encontrado na lista.')
   }
-  num.value = ''
-  num.focus() //volta pro input o foco do mouse
+
+  num.value = '' //para apagar o campo
+  num.focus() //para o mouse focar novamente no campo
 }
 
 function finalizar() {
   if (valores.length == 0) {
-    alert('Adicione valores antes de finalizar')
+    window.alert('adicione valores antes de finalizar.')
   } else {
     let tot = valores.length
     let maior = valores[0]
     let menor = valores[0]
     let soma = 0
     let media = 0
+
     for (let pos in valores) {
+      //para cada posição em valores faça o teste.
       soma += valores[pos]
       if (valores[pos] > maior) maior = valores[pos]
-      if (valores[pos] < menor) menor = valores[pos]
+      if (valores[pos] < menor) menor = valores[pos] //se o valores na posição pos for maior que o maior valor, o maior valor passa a ser valores pos
     }
     media = soma / tot
     res.innerHTML = ''
